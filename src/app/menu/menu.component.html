@@ -1,0 +1,21 @@
+<div class="Menu-Content" *ngIf="service.load.menu == true">
+    <img src="../assets/Glogo.png"  class="logo" alt="">
+    <h6 class="h6" [align]="'center'"> Categories </h6>
+     <div class="Menu"  *ngFor="let data of Cate let i =index " (click)="Gotocate(data.id,data,i)">
+      <div class="box-menu">
+       <img [src]="data.category_thumb_image" class="avatar" alt="">
+      </div>
+      <div class="box-menu name">
+         <h6> {{data.category_name}}  </h6>
+      </div>
+     </div>
+     <h6 [align]="'center'" class="h6"> Nos Fournisseurs </h6>
+     <div class="Menu" (click)="GotoFourProduct(data.id)" *ngFor="let data of Four" >
+      <div class="box-menu">
+       <img [src]="data.FourPhoto" class="avatar" alt="">
+      </div>
+      <div class="box-menu name">
+         <h6> {{data.FourName}} </h6> 
+      </div>
+     </div>
+   </div>

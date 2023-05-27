@@ -1,0 +1,66 @@
+<div class="d-flex head " >
+   <i class="pi pi-arrow-circle-left backIcon" *ngIf=" hideBackbuton" (click)="Back()" ></i>
+    <input class="form-control  me-1" type="search" routerLink="/search" [(ngModel)]="word" (input)="service.Search(word)" placeholder="Rechercher un produit" aria-label="Search">
+    <button class="btn btn-primary" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <i class="bi bi-cart4 user btn btn-primary position-relative"  (click)="op.toggle($event)" >
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{service.PanierCompter}}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+    </i>
+    <i class="bi bi-person btn btn-primary user" (click)="ou.toggle($event)"></i>
+</div>
+<!--panier-->
+<p-overlayPanel #op>
+    <ng-template pTemplate="content">
+        <div class="card item">
+          <div >
+           <div *ngFor="let data of service.panier">
+            <div class="d-flex">
+                <img [src]="data.product_thumb_image" alt="" width="50" height="80" class="item img">
+                <div class="item">
+                    <p class="text-primary"> {{data.product_name}}  </p>
+                    <p class="text-muted"> {{ data.sales_price.toLocaleString('en-US') + " * " + data.qty }}  </p>
+                </div>
+                <i class="pi pi-trash item" (click)="deleteInCart(data)"  style="font-size: 1rem; color: red "></i>
+            </div>
+           </div>
+          </div> 
+        </div>
+        <hr style="color:#0590e6 ;">
+        <div >
+          <div class="d-flex">
+           <h6>Sous-total</h6>
+           <h6 class="somme" style="color:#0590e6 ;"> {{service.StPanier.toLocaleString('en-US')}} GNF</h6>
+          </div>
+          <div [align]="'center'">
+            <p-button class="btn" [disabled]="service.StPanier<=0" label="Planifier ma commande"></p-button> 
+          </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+ <!--utilisateur-->
+ <p-overlayPanel #ou>
+    <ng-template pTemplate="content">
+       <div class="ifUser" *ngIf="service.User">
+          <h6> Hello <span style="color:#0590e6 ;"> {{service.User.name}} </span> </h6> 
+          <hr style="color:#0590e6 ;">
+          Email : <span style="color:#0590e6 ;"> {{service.User.email}} </span><br>
+          Code Id : <span style="color:#0590e6 ;"> {{service.User.code}} </span>
+          <hr style="color:#0590e6 ;">
+          <h5>Bonus</h5>
+        <h6> statut : <span style="color:#0590e6 ;"> {{service.User.bonus.active ? "active" : "desactivé"}} </span> </h6>  
+        <h6> solde : <span style="color:#0590e6 ;"> {{service.User.bonus.montant}} GNF</span> </h6>
+        <hr style="color:#0590e6 ;">
+        <p-button label="Se deconnecté" (onClick)="signout()"></p-button>
+       </div>
+       <div class="noUser"  *ngIf="!service.User">
+          <div class="d-flex">
+           <p-button class="BtnL" label="S'inscrire" routerLink="/login"></p-button>
+           <p-button class="BtnL" label="Se connecté" routerLink="/login"></p-button>
+          </div>
+       </div>
+    </ng-template>
+</p-overlayPanel>

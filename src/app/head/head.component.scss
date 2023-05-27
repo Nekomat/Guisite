@@ -1,0 +1,44 @@
+.head{
+    margin-top: 10px;
+    margin-left: 150px;
+    
+}
+.user{
+    margin-left: 20px;
+}
+input{
+    width: 40%;
+}
+.item{
+   margin: 8px;
+}
+.img{
+    padding: 2px;
+    border-radius: 5px;
+    background-color: #eee;
+}
+.btn{
+    margin: 8px;
+}
+.item{
+    max-height: 200px ;
+    overflow: auto;
+}
+.somme{
+    margin-left: 150px;
+}
+.pi-trash:hover{
+    cursor: pointer;
+}
+.BtnL{
+    margin: 4px;
+}
+.backIcon{ 
+    font-size: 30px;
+    margin-right: 50px;
+    margin-top: 15px;
+    color: #0590e6;
+}
+.backIcon:hover{
+    cursor: pointer;
+}

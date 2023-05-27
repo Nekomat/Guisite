@@ -1,0 +1,43 @@
+<div class="d-flex">
+  <app-menu></app-menu>
+  <div class="mainContent">
+   <app-head></app-head>
+    <div class="ContentCate" *ngIf="OnCate">
+       <h6 [align]="'center'" class="title"> Catégorie <span class="CateName"> {{OnCate.category_name}} </span>  </h6>
+        <div class="sousCate">
+            <p-tabView [activeIndex]="0" [scrollable]="true" > 
+                <p-tabPanel *ngFor="let data of OnCate.SousCate let i = index" [header]="data"  >
+                    <div class="d-flex flex-wrap ProductContent" >
+                        <div *ngFor="let product of OnCate.products "> 
+                            <div  *ngIf="product.SousCate == data">
+                                <div class="card product Productcard">
+                                    <img [src]="product.product_thumb_image" width="150" height="150" />
+                                     <p class="Pname"> {{ product.product_name }} </p>
+                                     <div [align]="'center'">
+                                        <p-tag severity="primary" [value]="product.sales_price.toLocaleString('en-US') + ' GNF'" ></p-tag>
+                                     </div>
+                                     <div class="d-flex btn"  *ngIf="!product.isPanier">
+                                        <p-button (onClick)="AddToCart(product)" type="button" styleClass="p-button-warning p-button-rounded mr-2" icon="pi pi-plus"></p-button>
+                                     </div>
+                                   
+                                     <div class="panier " [align]="'center'" *ngIf="product.isPanier">
+                                        <div class="d-flex btnAdd" >
+                                            <i class="pi pi-trash" (click)="DeleteinCart(product)" *ngIf="!product.ShowLess" style="font-size: 1.6rem; color: red " ></i>
+                                            <i class="pi pi-minus-circle " (click)="LessQty(product)" *ngIf="product.ShowLess" style="font-size: 1.8rem ; color: green "></i>
+                                            <p class="count"> {{product.qty}} </p>
+                                            <i class="pi pi-plus-circle" (click)="addQty(product)"   style="font-size: 1.8rem; color: green"></i>
+                                        </div>
+                                       
+                                     </div>
+                                </div>
+                              </div>
+                              
+                        </div>
+                     
+                      </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+  </div>
+</div>

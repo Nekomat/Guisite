@@ -1,0 +1,86 @@
+<div class="d-flex all" *ngIf="service.load.home == true">
+    <app-menu></app-menu>
+    <div class="content">
+    <app-head></app-head>
+    
+     
+     <div class="hom-content">
+        <p-toast></p-toast>
+         <!--bannier--> 
+     
+     <div *ngIf="service.Banner" class="banner">
+
+        <p-carousel  [value]="service.Banner"  [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions" >
+            <ng-template let-product pTemplate="item" >
+                <img [src]="product.slider_image" class="img-slider" width="600" height="300">
+            </ng-template>
+        </p-carousel>
+
+     </div>
+        <!-- fin bannier-->
+        <div class="four"  *ngIf="service.Four">
+            <h6 > Nos Fournisseurs </h6>
+            <p-carousel [value]="service.Four" [numVisible]="3" [numScroll]="2" [circular]="true" [autoplayInterval]="3000" >
+                <ng-template let-product pTemplate="item">
+                    <div class="d-flex Box" (click)="GotoFourProduct(product.id)">
+                        <img [src]="product.FourPhoto" class="avatar" alt="">
+                         <p> {{product.FourName}} </p>
+                        </div>
+                </ng-template>
+            </p-carousel>
+            
+           
+        </div>
+        <div class="product" *ngIf="service.categorie">
+            <div class="item" *ngFor="let data of service.categorie">
+                 <div class="d-flex toolbar ">
+                    <div class="title-toolbar">
+                        <p> {{data.category_name}} </p>
+                    </div>
+                    <div class="btn-toolbar">
+                      <button class="btn btn-primary" (click)="GotoCateProduct(data.id)"> Voir plus </button>
+                    </div>
+                 </div>
+                <p-carousel [value]="data.products"  [numVisible]="4" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+                    <ng-template let-product pTemplate="item" >
+                        <div class="card product" >
+                            <img [src]="product.product_thumb_image" width="150" height="150" />
+                             <p class="Pname"> {{ product.product_name }} </p>
+                             <div [align]="'center'">
+                                <p-tag severity="primary" [value]="product.sales_price.toLocaleString('en-US') + ' GNF'" ></p-tag>
+                             </div>
+                             <div class="d-flex btn"  *ngIf="!product.isPanier">
+                                <p-button (onClick)="AddToCart(product)" type="button" styleClass="p-button-warning p-button-rounded mr-2" icon="pi pi-plus"></p-button>
+                             </div> 
+                           
+                             <div class="panier " [align]="'center'" *ngIf="product.isPanier">
+                                <div class="d-flex btnAdd" >
+                                    <i class="pi pi-trash" (click)="DeleteinCart(product)" *ngIf="!product.ShowLess" style="font-size: 1.6rem; color: red " ></i>
+                                    <i class="pi pi-minus-circle " (click)="LessQty(product)" *ngIf="product.ShowLess" style="font-size: 1.8rem ; color: green "></i>
+                                    <p class="count"> {{product.qty}} </p>
+                                    <i class="pi pi-plus-circle" (click)="addQty(product)"   style="font-size: 1.8rem; color: green "></i>
+                                </div>
+                               
+                             </div>
+                        
+                             
+                        </div>
+                    </ng-template>
+                </p-carousel>
+
+            </div>
+            
+
+        </div>
+        <!--le modal pour l'affichage des single product-->
+      
+    </div>
+    </div>
+   
+</div>
+<div class="preloader justify-content-center align-items-center" [align]="'center'"  *ngIf="service.load.home == false && service.load.menu == false">
+  <img src="../../assets/0_4Gzjgh9Y7Gu8KEtZ.gif" alt="" width="600" height="600">
+</div>
+
+
+

@@ -1,0 +1,83 @@
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+       
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card bg-white">
+            <div class="card-body p-5">
+                <h3 [align]="'center'"> Guicart plus votre <span  style="color:#0590e6 ;">épicerie en ligne</span> </h3>
+              <form class="mb-3 mt-md-4">
+                <p-tabMenu [model]="items" [activeItem]="activeItem"  (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
+                <div class="mb-3">
+                    <!--register-->
+                    <div class="register" *ngIf="activeItem.label == 'Creer un compte' && otp==false">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label ">Nom </label>
+                            <input type="text" [(ngModel)]="family" class="form-control" name="Username" id="name" placeholder="nom"  > 
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prenom" class="form-label ">Prenom</label>
+                            <input type="text" [(ngModel)]="name" class="form-control" name="Password" id="prenom" placeholder="*****"  >
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label ">Email</label>
+                            <input type="text" [(ngModel)]="email" class="form-control" name="Username" id="email" placeholder="nom"  > 
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label ">Numéro de telephone</label>
+                            <input type="number" [(ngModel)]="phone" class="form-control" name="Password" id="phone" placeholder="*****"  >
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <label for="password" class="form-label ">Mot de passe</label>
+                            <input type="password" [(ngModel)]="password" class="form-control" name="Username" id="password" placeholder="*******"  > 
+                        </div>
+                      </div>
+                      <div class="d-grid" [align]="'center'">
+                        <p-button label="Suivant" [loading]="loading" (click)="sendOtp()"></p-button>
+                    </div>
+                    </div>
+                     <!--otp verification-->
+                    <div *ngIf="otp">
+                      <div class="mb-3">
+                          <label for="otp" class="form-label ">Entrer le code de vérification envoyer sur votre numéro</label>
+                          <input type="number" [(ngModel)]="OtpCode" class="form-control" name="otp" id="otp" placeholder="Le code OTP ici" >
+                        </div>
+                        <div class="d-grid" [align]="'center'">
+                          <div class="d-flex">
+                              <p-button label="retour"  (click)="otp = false"></p-button>
+                              <p-button label="Suivant" [loading]="loading" ></p-button>
+                          </div>
+                         
+                      </div>
+                  </div>
+                </div>
+                <div class="mb-3" >
+                    <!--login-->
+                 <div class="login" *ngIf="activeItem.label == 'Se connecte'">
+                    <div class="mb-3">
+                        <label for="email" class="form-label ">Email</label>
+                        <input type="email" class="form-control" [(ngModel)]="UserEmail" name="Username" id="email" placeholder="nom"  > 
+                      </div>
+                      <div class="mb-3">
+                        <label for="password" class="form-label ">Mot de passe</label>
+                        <input type="password" [(ngModel)]="UserPassword" class="form-control" name="Password" id="password" placeholder="*******" >
+                      </div>
+                      <div class="d-grid">
+                        <p-button label="Se connecté" [loading]="loading" (onClick)="Login()" ></p-button>
+                    </div>
+                 </div>
+                </div>
+               
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

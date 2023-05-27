@@ -1,0 +1,55 @@
+.Productcard{
+    margin: 8px;
+    width: 200px;
+ }
+ .mainContent{
+    width: 100%;
+ }
+ .product{
+    .btn{
+       margin-left: 130px;
+    }
+    .Pname{
+       width: 200px;
+       white-space: nowrap;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       font-weight: bold;
+    }
+   .panier{
+    margin: 4px;
+    margin-left: 10px;
+    i{
+        margin: 8px;
+    }
+    i:hover{
+        cursor: pointer;
+    }
+    .btnAdd{
+        margin-left: 50px;
+    }
+    .count {
+        margin-top: 8px;
+        font-weight: bold;
+    }
+    
+   }
+
+}
+.MainContent{
+    width: 100%;
+}
+.FourProductContent{
+    max-height: 80vh;
+    overflow: auto;
+}
+.title{
+  font-size: 20px;
+  color: #0590e6;
+}
+.FourName{
+    padding: 5px;
+    background-color: #eee;
+    border-radius: 10px;
+    margin: 10px;
+}

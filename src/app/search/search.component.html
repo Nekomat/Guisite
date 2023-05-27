@@ -1,0 +1,37 @@
+<div class="d-flex">
+  <app-menu></app-menu>
+  <div class="MainContent">
+    <app-head></app-head>
+    <div class="ContanerSerach">
+        <div class="row" *ngIf="service.product[0]">
+            <div class="col-md-3" *ngFor="let product of service.product ">
+              <div class="card product Productcard">
+                  <img [src]="product.product_thumb_image" width="150" height="150" />
+                   <p class="Pname"> {{ product.product_name }} </p>
+                   <div [align]="'center'">
+                      <p-tag severity="primary" [value]="product.sales_price.toLocaleString('en-US') + ' GNF'" ></p-tag>
+                   </div>
+                   <div class="d-flex btn"  *ngIf="!product.isPanier">
+                      <p-button (onClick)="AddToCart(product)" type="button" styleClass="p-button-warning p-button-rounded mr-2" icon="pi pi-plus"></p-button>
+                   </div>
+                 
+                   <div class="panier " [align]="'center'" *ngIf="product.isPanier">
+                      <div class="d-flex btnAdd" >
+                          <i class="pi pi-trash" (click)="DeleteinCart(product)" *ngIf="!product.ShowLess" style="font-size: 1.6rem; color: red " ></i>
+                          <i class="pi pi-minus-circle " (click)="LessQty(product)" *ngIf="product.ShowLess" style="font-size: 1.8rem ; color: green "></i>
+                          <p class="count"> {{product.qty}} </p>
+                          <i class="pi pi-plus-circle" (click)="addQty(product)"   style="font-size: 1.8rem; color: green"></i>
+                      </div>
+                     
+                   </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="NoneSearch content-center align-items-center" [align]="'center'" *ngIf="!service.product[0]">
+           <h6>Aucun produit correspondant à votre récherche</h6>
+          </div>
+    </div>
+   
+  </div>
+</div>
